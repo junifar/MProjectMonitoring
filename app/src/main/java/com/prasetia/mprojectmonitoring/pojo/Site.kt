@@ -46,3 +46,5 @@ data class Site(
 	@field:SerializedName("desc")
 	val desc: String? = null
 )
+
+data class SiteResult(val items: List<Site>)
