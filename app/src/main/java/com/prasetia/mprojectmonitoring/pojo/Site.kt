@@ -1,5 +1,6 @@
 package com.prasetia.mprojectmonitoring.pojo
 
+
 import com.google.gson.annotations.SerializedName
 
 data class Site(
@@ -47,4 +48,5 @@ data class Site(
 	val desc: String? = null
 )
 
-data class SiteResult(val items: List<Site>)
+data class SiteResult(@field:SerializedName("")
+					  val site:List<Site>)
