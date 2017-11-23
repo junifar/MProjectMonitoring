@@ -8,4 +8,22 @@
     tools:context="com.prasetia.mprojectmonitoring.HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:columnCount="2"
+        app:rowCount="2">
+        <Button android:id="@+id/btnPP1"
+            android:text="PP"/>
+        <Button android:id="@+id/btnPP"
+            android:text="PP"/>
+    </android.support.v7.widget.GridLayout>
 </android.support.constraint.ConstraintLayout>
