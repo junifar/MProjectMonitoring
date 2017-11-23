@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import com.prasetia.mprojectmonitoring.config.ExternalUrl.Companion.MOBILE_API_URL
 import com.prasetia.mprojectmonitoring.config.ExternalUrl.Companion.SITE_API_URL
 import com.prasetia.mprojectmonitoring.pojo.Result
 import com.prasetia.mprojectmonitoring.pojo.Site
+import com.prasetia.mprojectmonitoring.pojo.User
 import com.prasetia.mprojectmonitoring.service.SiteApiService
 import com.prasetia.mprojectmonitoring.service.UserApiService
 import kotlinx.android.synthetic.main.activity_login.*
@@ -44,6 +46,26 @@ class LoginActivity : AppCompatActivity() {
                 t?.printStackTrace()
                 progressBar.visibility = View.GONE
             }
+        })
+    }
+
+    private fun getUser(){
+        val retrofit = Retrofit.Builder()
+                .baseUrl(MOBILE_API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val userApiService = retrofit.create(UserApiService::class.java)
+        val result = userApiService.getUser()
+        result.enqueue(object:Callback<List<User>>{
+            override fun onFailure(call: Call<List<User>>?, t: Throwable?) {
+                t?.printStackTrace()
+                progressBar.visibility = View.GONE
+            }
+
+            override fun onResponse(call: Call<List<User>>?, response: Response<List<User>>?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
         })
     }
 

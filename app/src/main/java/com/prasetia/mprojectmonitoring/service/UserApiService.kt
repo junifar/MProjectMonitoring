@@ -1,6 +1,7 @@
 package com.prasetia.mprojectmonitoring.service
 
 import com.prasetia.mprojectmonitoring.pojo.Result
+import com.prasetia.mprojectmonitoring.pojo.User
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -13,4 +14,7 @@ interface UserApiService {
 
     @GET("api")
     fun getResultAsJSON(): Call<Result>
+
+    @GET("public/muser")
+    fun getUser(): Call<List<User>>
 }
