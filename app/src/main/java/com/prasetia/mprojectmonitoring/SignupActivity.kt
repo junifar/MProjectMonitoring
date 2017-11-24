@@ -16,7 +16,9 @@ class SignupActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         btnSignin.setOnClickListener(
-                Toast.makeText(applicationContext.f"berhasil",Toast.LENGTH_SHORT).show();
+                {
+                    Toast.makeText(applicationContext, "berhasil", Toast.LENGTH_SHORT).show()
+                }
         )
     }
 
