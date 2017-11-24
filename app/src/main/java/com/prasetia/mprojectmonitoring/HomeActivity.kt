@@ -7,13 +7,26 @@ import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import com.prasetia.mprojectmonitoring.adapter.ProjectCorrectiveAdapter
+import com.prasetia.mprojectmonitoring.config.ExternalUrl.Companion.MOBILE_API_URL
 import com.prasetia.mprojectmonitoring.config.Logs
+import com.prasetia.mprojectmonitoring.pojo.ProjectCorrective
+import com.prasetia.mprojectmonitoring.service.ProjectCorrectiveApiService
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+import kotlinx.android.synthetic.main.content_home.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    lateinit var adapter:ProjectCorrectiveAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +47,34 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        getProjectCorrective()
+
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        projectCorrectiveRecyclerView.layoutManager = linearLayoutManager
+
+    }
+
+    fun getProjectCorrective(){
+        val retrofit = Retrofit.Builder()
+                .baseUrl(MOBILE_API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val projectCorrectiveApiService = retrofit.create(ProjectCorrectiveApiService::class.java)
+        val result = projectCorrectiveApiService.getResultProjectCorrective()
+        result.enqueue(object :Callback<List<ProjectCorrective>>{
+            override fun onResponse(call: Call<List<ProjectCorrective>>?, response: Response<List<ProjectCorrective>>?) {
+                if (response != null) {
+                    adapter = ProjectCorrectiveAdapter(response.body()!!)
+                    projectCorrectiveRecyclerView.adapter = adapter
+                }
+            }
+
+            override fun onFailure(call: Call<List<ProjectCorrective>>?, t: Throwable?) {
+                t?.printStackTrace()
+            }
+
+        })
     }
 
     override fun onBackPressed() {
