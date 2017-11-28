@@ -22,7 +22,7 @@ class FrontActivity : AppCompatActivity() {
         })
 
         btnHome.setOnClickListener({
-            val intent = Intent(applicationContext, HomeActivity::class.java)
+            val intent = Intent(applicationContext, NewsActivity::class.java)
             startActivity(intent)
         })
 
