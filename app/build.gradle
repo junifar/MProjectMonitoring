@@ -41,6 +41,9 @@ dependencies {
     // rxandroid
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
+    //picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     compile 'com.google.code.gson:gson:2.8.2'
     implementation 'com.android.support:gridlayout-v7:26.1.0'
 }
