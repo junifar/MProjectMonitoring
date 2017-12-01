@@ -1,6 +1,7 @@
 package com.prasetia.mprojectmonitoring
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.provider.Settings
 import android.support.design.widget.TextInputLayout
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.view.View
 import android.widget.Toast
+import com.prasetia.mprojectmonitoring.config.Encrypt
 import com.prasetia.mprojectmonitoring.config.ExternalUrl.Companion.MOBILE_API_URL
 import com.prasetia.mprojectmonitoring.config.Logs
 import com.prasetia.mprojectmonitoring.service.SignupApiService
@@ -18,6 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class SignupActivity : AppCompatActivity(){
 
@@ -26,6 +29,13 @@ class SignupActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val preference = getSharedPreferences("com.prasetia.MProjectMonitoring", Context.MODE_PRIVATE)
+        preference.edit().putString(Encrypt.encrypt("Sample"), Encrypt.encrypt("contoh")).apply()
+
+//        Toast.makeText(applicationContext, UUID.randomUUID().toString(), Toast.LENGTH_LONG).show()
+//        Toast.makeText(applicationContext, Encrypt.decrypt(preference.getString("Sample","")), Toast.LENGTH_LONG).show()
+
 
         val androidId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         Logs.trackLog( androidId, "Access SignupActivity")
