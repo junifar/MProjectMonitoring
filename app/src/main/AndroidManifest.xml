@@ -33,8 +33,8 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:label="Signup"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="Home"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
     </application>
 </manifest>
